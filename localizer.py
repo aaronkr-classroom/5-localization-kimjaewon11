@@ -33,7 +33,7 @@ def sense(color, grid, beliefs, p_hit, p_miss):
     total_beliefs = sum(sum(row) for row in new_beliefs)
     for i in range(len(new_beliefs)): # 각 행에 대해
         for j in range(len(new_beliefs[i])): # 각 열에 대해
-            new_beliefs[i][j] /= total_beliefs 
+            new_beliefs[i][j] /= total_beliefs # 정규화
 
     return new_beliefs
 
@@ -43,8 +43,8 @@ def move(dy, dx, beliefs, blurring):
     new_G = [[0.0 for i in range(width)] for j in range(height)]
     for i, row in enumerate(beliefs):
         for j, cell in enumerate(row):
-            new_i = (i + dy ) % width
-            new_j = (j + dx ) % height
+            new_i = (i + dy ) % height
+            new_j = (j + dx ) % width
             # pdb.set_trace()
             new_G[int(new_i)][int(new_j)] = cell
     return blur(new_G, blurring)
